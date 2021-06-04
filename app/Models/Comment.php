@@ -10,9 +10,9 @@ class Comment extends Model
 {
     use HasFactory;
 
-    public function post()
+    /**public function post()
     {
         //Le Commentaire appatient a 1 Post
         return $this->belongsTo(Post::class);
-    }
+    }*/
 }
