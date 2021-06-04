@@ -21,8 +21,12 @@ Route::get('/', function () {
 
 
 Route::get('/articles', [PostController::class, 'index'])->name('articles.index');
+
 Route::get('/posts/create', [PostController::class, 'create'])->name('articles.create');
 Route::post('/posts/create', [PostController::class, 'store'])->name('articles.store');
+
+Route::get('/create-poly-relations-exemple', [PostController::class, 'polyRelations'])->name('poly');
+
 Route::get('/posts/{id}', [PostController::class, 'show'])->whereNumber('id')->name('articles.posts');
 Route::get('/contact', [PostController::class, 'contact'])->name('contact');
 

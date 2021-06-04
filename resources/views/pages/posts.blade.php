@@ -11,13 +11,13 @@
 
     <hr>
 
-    {{-- @if ($posts->comments->count() > 0)
+    @if ($posts->comments->count() > 0)
         @foreach($posts->comments as $comment)
             <div><p>{{ $comment->content }}</p></div>
         @endforeach
     @else
         <div><p>Pas encore de Commentaires</p></div>
-    @endif --}}
+    @endif
 
     <hr>
 

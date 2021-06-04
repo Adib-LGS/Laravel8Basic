@@ -14,11 +14,18 @@ class Post extends Model
 
     protected $fillable = ['title', 'content'];
 
-    /**public function comments()
+    /**
+     * public function comments()
     {
         //1 Post a plusieurs Commentaires
         return $this->hasMany(Comment::class);
-    }*/
+    }
+    */
+
+    public function comments()
+    { 
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 
     public function image()
     {

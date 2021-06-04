@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index()
     {   
+
         $posts = Post::all();
         //dd($posts);
 
-        return view('pages.articles', compact('posts'));
+        $videos = Video::find(1);
+        //dd($videos);
+
+        return view('pages.articles', compact('posts', 'videos'));
     }   
 
 
@@ -55,5 +61,24 @@ class PostController extends Controller
     public function contact()
     {
         return view('pages.contact');
+    }
+
+    /**Register comment with Polymorphic Relationship manually without CRUD */
+    public function polyRelations()
+    {
+        $posts = Post::find(3);
+        $video = Video::find(1);
+
+        //dd($post);
+
+        $comment = new Comment(['content' => 'Post comment']);
+        $comment2 = new Comment(['content' => 'Video comment']);
+        $comment3 = new Comment(['content' => 'Seconde Post comment']);
+
+        //Register comm for Video in Comment table DB
+        $video->comments()->save($comment2);
+
+        $posts->comments()->saveMany([$comment, $comment3]);
+
     }
 }
