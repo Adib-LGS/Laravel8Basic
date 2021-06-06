@@ -28,4 +28,5 @@
     @else
         <div><p>Pas encore de Tag pour ce post</p></div>
     @endif
+
 @endsection

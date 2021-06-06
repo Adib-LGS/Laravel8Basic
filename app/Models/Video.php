@@ -14,5 +14,10 @@ class Video extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
+
+    public function latestComment()
+    {
+        return $this->hasOne(Comment::class)->latsestOfMany();
+    }
     
 }

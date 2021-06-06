@@ -24,6 +24,8 @@
     @if($videos->count() > 0)
     @foreach($videos->comments as $comment)
         <p>Commentaires Vidéos: {{ $comment->content }}</p>
+        <p>Derniers commentaires: {{ $comment->latestComment }}</p>
+
     @endforeach
     @endif
 
