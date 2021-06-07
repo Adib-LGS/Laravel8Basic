@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Video;
+use App\Models\Comment;
+use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -50,6 +52,22 @@ class PostController extends Controller
             'content' => 'required'
         ]);
 
+        /**Using Storage Facade could be replaced by Request bellow!!!!
+            $image = Storage::disk('local')->put('avatars', $request->file('avatar'));
+            dd(Storage::url($image)); image's Relative Path
+            dd(Storage::get($image));
+            dd(Storage::disk('local')->exists($image));
+        */
+
+        // Store extension + personalise name in file
+        $fileName = time() . '.' . $request->file('avatar')->extension();
+
+        $path = $request->file('avatar')->storeAs(
+            'avatars',
+            $fileName,
+            'public'
+        );
+
 
         //dd($request->title);
         /**$post = new Post();
@@ -57,10 +75,19 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->save();**/
 
-        Post::create([
+        $posts = Post::create([
             'title' => $request->title,
             'content' => $request->content,
         ]);
+
+        $image = new Image();
+        $image->path = $path;
+        // $image->post_id = $post->id;
+
+        //Save Post Id + Linked Image in DB
+        $posts->image()->save($image);
+
+        //dd('cool');
     }
 
 

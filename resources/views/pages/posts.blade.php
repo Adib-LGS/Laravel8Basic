@@ -3,7 +3,7 @@
    <div> <h2>Poste numéro: {{ $posts->id }} </h2></div>
 
     <hr>
-    <div><img src="{{ $posts->image ? $posts->image->path : 'Pas d\'image pr le moment' }}" alt="image"></div>
+    <div><img src="{{ Storage::url($posts->image->path) }}" alt="image"></div>
     <div>
     <p>Titre: {{ $posts->title }}</p>
     <p>Contenu: {{ $posts->content }}</p>
